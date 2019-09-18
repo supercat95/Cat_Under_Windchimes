@@ -7,7 +7,8 @@
 float noiseScale = 15;
 
 void setup() {
-  size(600,600);
+  size(640,400); // 1/4 size of display (2560,1600)
+  //fullScreen();
   
     /*
     // test line for reference
@@ -17,6 +18,7 @@ void setup() {
       line(width/3+i, (height/2) + yInc, (width/3)+i, (height/2) + yInc);
     }
     */
+    
     
     
 }
