@@ -7,11 +7,12 @@
 float noiseScale = 15;
 
 // colors for the sunset
-purple1 = color(152,50,117);
-purple2 = color(129,29,94);
-red = color(253,47,36);
-orange = color(255,111,1);
-yellow = color(254,216,0);
+color purple1 = color(152,50,117);
+color purple2 = color(129,29,94);
+color red = color(253,47,36);
+color orange = color(255,111,1);
+color yellow = color(254,216,0);
+color newColor;
 
 void setup() {
   size(640,400,P3D); // 1/4 size of display (2560,1600)
@@ -26,12 +27,29 @@ void setup() {
     }
     */
     
+    sunset();
     windchime1();
     
 }
 
+void sunset() {
+  //noStroke();
+  fill(purple1);
+  rect(0,0,width,10);
+  //newColor = lerpColor(purple1,purple2,.1);
+  for (int i = 10; i < height/5; i+=10) {
+    newColor = lerpColor(purple1,purple2,.2+(i/10));
+    fill(newColor);
+    rect(0,i,width,10);
+  }
+  fill(purple2);
+  rect(0,height/5,width,10);
+}
+
+// ------------------------------------------------------------
 void windchime1() {
   pushMatrix();
+    stroke(0,0,0);
     strokeWeight(5);
     translate(width/2 - 20, height/8);
     
@@ -72,15 +90,5 @@ void windchime1() {
 }
 
 void windchime2() {
-  
-}
-
-void sunset() {
-  for (int i = 0; i < height; i++) {
-    if (i < height/5) {
-      
-    }
-    line(0,i,width,0);
-  }
   
 }
