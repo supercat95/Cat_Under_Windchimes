@@ -6,6 +6,13 @@
 
 float noiseScale = 15;
 
+// colors for the sunset
+purple1 = color(152,50,117);
+purple2 = color(129,29,94);
+red = color(253,47,36);
+orange = color(255,111,1);
+yellow = color(254,216,0);
+
 void setup() {
   size(640,400,P3D); // 1/4 size of display (2560,1600)
   //fullScreen();
@@ -65,5 +72,15 @@ void windchime1() {
 }
 
 void windchime2() {
+  
+}
+
+void sunset() {
+  for (int i = 0; i < height; i++) {
+    if (i < height/5) {
+      
+    }
+    line(0,i,width,0);
+  }
   
 }
