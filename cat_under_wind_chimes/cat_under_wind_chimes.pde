@@ -6,13 +6,18 @@
 
 float noiseScale = 15;
 
-// colors for the sunset
+// colors for the sunset, obtained from https://colorpalettes.net/color-palette-2096/
 color purple1 = color(152,50,117);
 color purple2 = color(129,29,94);
 color red = color(253,47,36);
 color orange = color(255,111,1);
 color yellow = color(254,216,0);
+
 color newColor;
+color color1;
+color color2;
+float y_bandInitial;
+float y_bandFinal;
 
 void setup() {
   size(640,400,P3D); // 1/4 size of display (2560,1600)
@@ -27,23 +32,31 @@ void setup() {
     }
     */
     
-    sunset();
+    sunset(purple1,purple2, 0,height/4);
+    sunset(purple2,red, height/4,2*height/4);
+    sunset(red,orange, 2*height/4,3*height/4);
+    sunset(orange,yellow, 3*height/4,4*height/4);
+    
     windchime1();
     
 }
 
-void sunset() {
-  //noStroke();
-  fill(purple1);
-  rect(0,0,width,10);
-  //newColor = lerpColor(purple1,purple2,.1);
-  for (int i = 10; i < height/5; i+=10) {
-    newColor = lerpColor(purple1,purple2,.2+(i/10));
-    fill(newColor);
-    rect(0,i,width,10);
-  }
-  fill(purple2);
-  rect(0,height/5,width,10);
+void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) {
+  pushMatrix();
+    translate(-50,0,-50);
+    noStroke();
+    fill(color1);
+    rect(y_bandInitial,0,width + 100,10);
+    for (int i = 10; i < y_bandFinal; i+=10) {
+      float amount = 0.1+(i/100.0);
+      println(amount);
+      newColor = lerpColor(color1,color2,amount);
+      fill(newColor);
+      rect(0,y_bandInitial + i,width + 100,10);
+    }
+    fill(color2);
+    rect(0,y_bandFinal,width + 100,10);
+  popMatrix();
 }
 
 // ------------------------------------------------------------
