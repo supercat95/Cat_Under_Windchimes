@@ -33,9 +33,9 @@ void setup() {
     */
     
     sunset(purple1,purple2, 0,height/4);
-    sunset(purple2,red, height/4,2*height/4);
-    sunset(red,orange, 2*height/4,3*height/4);
-    sunset(orange,yellow, 3*height/4,4*height/4);
+    sunset(purple2,red, height/4,height/2);
+    sunset(red,orange, height/2,3*height/4);
+    sunset(orange,yellow, 3*height/4,height);
     
     windchime1();
     
@@ -43,11 +43,11 @@ void setup() {
 
 void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) {
   pushMatrix();
-    translate(-50,0,-50);
+    translate(-50,-30,-50);
     noStroke();
     fill(color1);
-    rect(y_bandInitial,0,width + 100,10);
-    for (int i = 10; i < y_bandFinal; i+=10) {
+    rect(0,y_bandInitial,width + 100,10);
+    for (int i = 10; i < y_bandFinal; i+=15) {
       float amount = 0.1+(i/100.0);
       println(amount);
       newColor = lerpColor(color1,color2,amount);
