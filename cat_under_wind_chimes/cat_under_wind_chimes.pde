@@ -47,7 +47,7 @@ void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) 
     noStroke();
     fill(color1);
     rect(0,y_bandInitial,width + 100,10);
-    for (int i = 10; i < y_bandFinal; i+=15) {
+    for (int i = 10; i < y_bandFinal; i+=10) {
       float amount = 0.1+(i/100.0);
       println(amount);
       newColor = lerpColor(color1,color2,amount);
