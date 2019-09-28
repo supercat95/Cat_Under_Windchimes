@@ -5,7 +5,7 @@
 */
 
 // used for the noise effect of the cat
-float noiseScale = 15;
+float noiseScale = 5;
 float[] yIncrement = new float[200];
 
 // colors for the sunset, obtained from https://colorpalettes.net/color-palette-2096/
@@ -26,20 +26,21 @@ void setup() {
   size(640,400,P3D); // 1/4 size of display (2560,1600)
   //fullScreen();
   
-  //sunset(purple1,purple2, 0,height/4);
-  //sunset(purple2,red, height/4,height/2);
-  //sunset(red,orange, height/2,3*height/4);
-  //sunset(orange,yellow, 3*height/4,height);
+  sunset(purple1,purple2, 0,height/4);
+  sunset(purple2,red, height/4,height/2);
+  sunset(red,orange, height/2,3*height/4);
+  sunset(orange,yellow, 3*height/4,height);
   
   initialize_yIncrement();   
   hint(DISABLE_OPTIMIZED_STROKE);
   hint(DISABLE_STROKE_PERSPECTIVE);
+  
+  starryCat();
 }
 
 void draw() {
-  starryCat();
   
-  // windchime1();
+   windchime1();
 }
 
 // --------------------------------------------------------------------------------
@@ -66,6 +67,7 @@ void windchime1() {
   pushMatrix();
     stroke(0,0,0);
     strokeWeight(5);
+    fill(100,100,100); // temp. replace with textures.
     translate(width/2 - 20, height/8);
     
     line(0,0, 40,0); // horizontal line
@@ -116,8 +118,10 @@ void initialize_yIncrement() {
 }
 
 void starryCat() {
-  strokeWeight(5);
   pushMatrix();
+    strokeWeight(2);
+    stroke(255,255,255);
+    noFill();
     translate(0,0,0);
     for (int i = 0; i < 200; i += random(1,8)) { // 43 lines for the cat
       rect(width/3+i, (height/2) + yIncrement[i], 1, 1);
