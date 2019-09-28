@@ -23,13 +23,13 @@ float y_bandInitial;
 float y_bandFinal;
 
 void setup() {
-  size(640,400,P3D); // 1/4 size of display (2560,1600)
+  size(640,400); // 1/4 size of display (2560,1600)
   //fullScreen();
   
-  sunset(purple1,purple2, 0,height/4);
-  sunset(purple2,red, height/4,height/2);
-  sunset(red,orange, height/2,3*height/4);
-  sunset(orange,yellow, 3*height/4,height);
+  //sunset(purple1,purple2, 0,height/4);
+  //sunset(purple2,red, height/4,height/2);
+  //sunset(red,orange, height/2,3*height/4);
+  //sunset(orange,yellow, 3*height/4,height);
   
   initialize_yIncrement();   
   hint(DISABLE_OPTIMIZED_STROKE);
@@ -40,13 +40,13 @@ void setup() {
 
 void draw() {
   
-   windchime1();
+   //windchime1();
 }
 
 // --------------------------------------------------------------------------------
 void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) {
   pushMatrix();
-    translate(-50,-30,-50);
+    translate(-50,-30); // z was -50
     noStroke();
     fill(color1);
     rect(0,y_bandInitial,width + 100,10);
@@ -89,9 +89,9 @@ void windchime1() {
     translate(-20,40);
     sphere(10); // left sphere
     
-    translate(20,-40,-20);
+    translate(20,-40); // z was -20
     line(0,0,0,20); // middle line
-    translate(0,20,0);
+    translate(0,20); // z was 0
     sphere(10); // middle sphere
     line(0,10,0,60);
     strokeWeight(0);
@@ -99,7 +99,7 @@ void windchime1() {
     box(30);
     
     strokeWeight(5);
-    translate(0,-70,20);
+    translate(0,-70); // z was 20
     line(10,-20,20,20); // right line
     translate(20,20);
     sphere(10); // right sphere
@@ -122,47 +122,12 @@ void starryCat() {
     strokeWeight(2);
     stroke(255,255,255);
     noFill();
-    translate(0,0,0);
-    for (int i = 0; i < 200; i += random(1,8)) { // 43 lines for the cat
-      rect(width/3+i, (height/2) + yIncrement[i], 1, 1);
-      /*
-      line();
-      line();
-      line();
-      line();
-      line();
-      line();
-       line();
-      line();
-      line();
-      line();
-      line();
-      line();
-       line();
-      line();
-      line();
-      line();
-      line();
-      line();
-       line();
-      line();
-      line();
-      line();
-      line();
-      line();
-       line();
-      line();
-      line();
-      line();
-      line();
-      line();
-       line();
-      line();
-      line();
-      line();
-      line();
-      line();
-      */
+    translate(width/3,4*height/5); // z was 10
+    for (int i = 0; i < 18; i += random(1,8)) { // 43 lines for the cat
+      //rect(width/3+i, (height/2) + yIncrement[i], 1, 1); // reference line
+      line(i, yIncrement[i], i, yIncrement[i]);
+      line(i + 18, yIncrement[i] - 5, i, yIncrement[i] - 7);
+      //line(i + 36,-7,54,-5);
     }
     popMatrix();
 }
