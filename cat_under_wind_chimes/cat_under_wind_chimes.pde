@@ -4,7 +4,9 @@
     Cat under Wind Chimes
 */
 
+// used for the noise effect of the cat
 float noiseScale = 15;
+float[] yIncrement = new float[200];
 
 // colors for the sunset, obtained from https://colorpalettes.net/color-palette-2096/
 color purple1 = color(152,50,117);
@@ -13,6 +15,7 @@ color red = color(253,47,36);
 color orange = color(255,111,1);
 color yellow = color(254,216,0);
 
+// used to create the gradient effect of the sunset
 color newColor;
 color color1;
 color color2;
@@ -23,24 +26,19 @@ void setup() {
   size(640,400,P3D); // 1/4 size of display (2560,1600)
   //fullScreen();
   
-    /*
-    // test line for reference
-    strokeWeight(5);
-    for (int i = 0; i < 200; i += random(1,8)) {
-      float yInc = random(-1 * noiseScale, noiseScale);
-      line(width/3+i, (height/2) + yInc, (width/3)+i, (height/2) + yInc);
-    }
-    */
-    
-    sunset(purple1,purple2, 0,height/4);
-    sunset(purple2,red, height/4,height/2);
-    sunset(red,orange, height/2,3*height/4);
-    sunset(orange,yellow, 3*height/4,height);
-    
-    windchime1();
+  //sunset(purple1,purple2, 0,height/4);
+  //sunset(purple2,red, height/4,height/2);
+  //sunset(red,orange, height/2,3*height/4);
+  //sunset(orange,yellow, 3*height/4,height);
+  
+  initialize_yIncrement();
+  starryCat();
+  
+  //windchime1();
     
 }
 
+// --------------------------------------------------------------------------------
 void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) {
   pushMatrix();
     translate(-50,-30,-50);
@@ -104,4 +102,60 @@ void windchime1() {
 
 void windchime2() {
   
+}
+
+// ------------------------------------------------------------
+void initialize_yIncrement() {
+  for (int i = 0; i < 200; i += random(1,8)) {
+      yIncrement[i] = random(-1 * noiseScale, noiseScale);
+      //float xInc - random(-1 * noiseScale, noiseScale);
+  }
+}
+
+void starryCat() {
+  strokeWeight(5);
+  pushMatrix();
+    //translate();
+    for (int i = 0; i < 200; i += random(1,8)) { // 43 lines for the cat
+     line(width/3+i, (height/2) + yIncrement[i], (width/3)+i, (height/2) + yIncrement[i]);
+      /*
+      line();
+      line();
+      line();
+      line();
+      line();
+      line();
+       line();
+      line();
+      line();
+      line();
+      line();
+      line();
+       line();
+      line();
+      line();
+      line();
+      line();
+      line();
+       line();
+      line();
+      line();
+      line();
+      line();
+      line();
+       line();
+      line();
+      line();
+      line();
+      line();
+      line();
+       line();
+      line();
+      line();
+      line();
+      line();
+      line();
+      */
+    }
+  popMatrix();  
 }
