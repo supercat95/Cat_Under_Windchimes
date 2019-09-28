@@ -31,11 +31,15 @@ void setup() {
   //sunset(red,orange, height/2,3*height/4);
   //sunset(orange,yellow, 3*height/4,height);
   
-  initialize_yIncrement();
+  initialize_yIncrement();   
+  hint(DISABLE_OPTIMIZED_STROKE);
+  hint(DISABLE_STROKE_PERSPECTIVE);
+}
+
+void draw() {
   starryCat();
   
-  //windchime1();
-    
+  // windchime1();
 }
 
 // --------------------------------------------------------------------------------
@@ -106,18 +110,17 @@ void windchime2() {
 
 // ------------------------------------------------------------
 void initialize_yIncrement() {
-  for (int i = 0; i < 200; i += random(1,8)) {
+  for (int i = 0; i < 200; i ++) {
       yIncrement[i] = random(-1 * noiseScale, noiseScale);
-      //float xInc - random(-1 * noiseScale, noiseScale);
   }
 }
 
 void starryCat() {
   strokeWeight(5);
   pushMatrix();
-    //translate();
+    translate(0,0,0);
     for (int i = 0; i < 200; i += random(1,8)) { // 43 lines for the cat
-     line(width/3+i, (height/2) + yIncrement[i], (width/3)+i, (height/2) + yIncrement[i]);
+      rect(width/3+i, (height/2) + yIncrement[i], 1, 1);
       /*
       line();
       line();
@@ -157,5 +160,5 @@ void starryCat() {
       line();
       */
     }
-  popMatrix();  
+    popMatrix();
 }
