@@ -8,6 +8,8 @@
 float noiseScale = 5;
 float[] yIncrement = new float[200];
 
+static int TIME = 0;
+
 // colors for the sunset, obtained from https://colorpalettes.net/color-palette-2096/
 color purple1 = color(152,50,117);
 color purple2 = color(129,29,94);
@@ -25,61 +27,65 @@ float y_bandFinal;
 void setup() {
   size(640,400); // 1/4 size of display (2560,1600)
   //fullScreen();
-  
-  //sunset(purple1,purple2, 0,height/4);
-  //sunset(purple2,red, height/4,height/2);
-  //sunset(red,orange, height/2,3*height/4);
-  //sunset(orange,yellow, 3*height/4,height);
-  
+   
   initialize_yIncrement();   
-  
-  // the following 23 lines draw the cat
-  // back of the cat-- left of the dip
-  noisyLine(0,0,0,-20);
-  noisyLine(18,-5,0,-5);
-  noisyLine(33,-10,0,5);
-  noisyLine(38,-42,0,45);
-  // end of the cat
-  noisyLine(45,57,0,-45);
-  noisyLine(90,-3,0,0);
-  noisyLine(77,-78,0,45);
-  noisyLine(72,-100,5,60);
-  noisyLine(27,-134,0,95);
-  noisyLine(-23,-140,0,120);
-  noisyLine(-102,-90,0,170);
-  // stomach of the cat
-  noisyLine(41,72,40,0);
-  // head of the cat -- right/up side
-  noisyLine(54,-24,10,80);
-  noisyLine(-41,-36,5,-160);
-  // head of the cat -- left/down side
-  noisyLine(-25,-79,10,175);
-  noisyLine(-58,-52,5,-135);
-  // head of the cat-- left/bottom ear
-  noisyLine(16,-62,0,175);
-  noisyLine(-56,38,0,-30);
-  // head of the cat-- right/top ear
-  noisyLine(-26,24,-5,-60);
-  noisyLine(0,-30,0,155);
-  // head of the cat-- top side
-  noisyLine(-50,20,0,-45);
-  // neck of the cat
-  noisyLine(-29,-20,-2,-110);
-  noisyLine(-22,0,-2,-45);
 }
 
 void draw() {
+  sunset(purple1,purple2, 0,height/4);
+  sunset(purple2,red, height/4,height/2);
+  sunset(red,orange, height/2,3*height/4);
+  sunset(orange,yellow, 3*height/4,height);
   
-   //windchime1();
+  //windchime();
+  
+  // the following 23 lines draw the cat
+  pushMatrix();
+    strokeWeight(2);
+    translate(2*width/5, (4*height/5) - 30); // z was 10
+    // back of the cat-- left of the dip
+    noisyLine(0,0,0,-20);
+    noisyLine(18,-5,0,-5);
+    noisyLine(33,-10,0,5);
+    noisyLine(38,-42,0,45);
+    // end of the cat
+    noisyLine(45,57,0,-45);
+    noisyLine(90,-3,0,0);
+    noisyLine(77,-78,0,45);
+    noisyLine(72,-100,5,60);
+    noisyLine(27,-134,0,95);
+    noisyLine(-23,-140,0,120);
+    noisyLine(-102,-90,0,170);
+    // stomach of the cat
+    noisyLine(41,72,40,0);
+    // head of the cat -- right/up side
+    noisyLine(54,-24,10,80);
+    noisyLine(-41,-36,5,-160);
+    // head of the cat -- left/down side
+    noisyLine(-25,-79,10,175);
+    noisyLine(-58,-52,5,-135);
+    // head of the cat-- left/bottom ear
+    noisyLine(16,-62,0,175);
+    noisyLine(-56,38,0,-30);
+    // head of the cat-- right/top ear
+    noisyLine(-26,24,-5,-60);
+    noisyLine(0,-30,0,155);
+    // head of the cat-- top side
+    noisyLine(-50,20,0,-45);
+    // neck of the cat
+    noisyLine(-29,-20,-2,-110);
+    noisyLine(-22,0,-2,-45);
+  popMatrix();
    
-   /*
-   // the following is for drawing purposes
-   fill(100,100,100);
-   rect(0,0,50,50);
-   fill(0,0,0);
-   text(pmouseX,20,20);
-   text(pmouseY,20,40);
-   */
+  swingingTail()
+  
+  //// the following is for drawing purposes
+  //fill(100,100,100);
+  //rect(0,0,50,50);
+  //fill(0,0,0);
+  //text(pmouseX,20,20);
+  //text(pmouseY,20,40);
+  
 }
 
 // --------------------------------------------------------------------------------
@@ -91,7 +97,6 @@ void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) 
     rect(0,y_bandInitial,width + 100,10);
     for (int i = 10; i < y_bandFinal; i+=10) {
       float amount = 0.1+(i/100.0);
-      println(amount);
       newColor = lerpColor(color1,color2,amount);
       fill(newColor);
       rect(0,y_bandInitial + i,width + 100,10);
@@ -159,10 +164,8 @@ void initialize_yIncrement() {
 
 void noisyLine(int xInc, int yInc, int lineLength, float rotation) {
   pushMatrix();
-    strokeWeight(2);
     stroke(255,255,255);
-   
-    translate(2*width/5, (4*height/5) - 30); // z was 10
+  
     rotate(radians(rotation));
     
     for (int i = 0; i < 18 + lineLength; i += random(0,8)) {
@@ -171,5 +174,15 @@ void noisyLine(int xInc, int yInc, int lineLength, float rotation) {
           line(i, yIncrement[i], i, yIncrement[i]); 
       popMatrix();
     }
+  popMatrix();
+}
+
+void swingingTail() {
+  TIME+=800000;
+  pushMatrix();
+    strokeWeight(10);
+    translate(373,357);
+    rotate(45);
+      noisyLine(0,0,40,sin(TIME)*0.9);
   popMatrix();
 }
