@@ -72,12 +72,14 @@ void draw() {
   
    //windchime1();
    
+   /*
    // the following is for drawing purposes
    fill(100,100,100);
    rect(0,0,50,50);
    fill(0,0,0);
    text(pmouseX,20,20);
    text(pmouseY,20,40);
+   */
 }
 
 // --------------------------------------------------------------------------------
