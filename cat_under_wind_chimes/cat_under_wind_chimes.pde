@@ -77,7 +77,7 @@ void draw() {
     noisyLine(-22,0,-2,-45);
   popMatrix();
    
-  swingingTail()
+  swingingTail();
   
   //// the following is for drawing purposes
   //fill(100,100,100);
@@ -178,11 +178,12 @@ void noisyLine(int xInc, int yInc, int lineLength, float rotation) {
 }
 
 void swingingTail() {
-  TIME+=800000;
+  TIME+=1;
   pushMatrix();
-    strokeWeight(10);
+    strokeWeight(4);
     translate(373,357);
-    rotate(45);
-      noisyLine(0,0,40,sin(TIME)*0.9);
+    rotate(109.6);
+      noisyLine(0,0,40,sin(TIME * 0.1)*20);
+      noisyLine(-4,-2,42,sin(TIME * 0.1)*20);
   popMatrix();
 }
