@@ -7,10 +7,14 @@ void setup() {
   
     // noise successfully applied to a line
     strokeWeight(5);
+    pushMatrix();
+    translate(width/3, height/2);
+    rotate(-45);
     for (int i = 0; i < 200; i += random(1,8)) {
       float yInc = random(-1 * noiseScale, noiseScale);
-      line(width/3+i, (height/2) + yInc, (width/3)+i, (height/2) + yInc);
+      line(i, yInc, i, yInc);
     }
+    popMatrix();
     
     /*
     // attempted to apply noise to a bezier curve

@@ -24,25 +24,40 @@ color color2;
 float y_bandInitial;
 float y_bandFinal;
 
+// used for the fills of the shapes for the windchime
+color[] randomRed = new color[18];
+color[] randomGreen = new color[18];
+color[] randomBlue = new color[18];
+int redValue;
+int greenValue;
+int blueValue;
+
 void setup() {
   size(640,400); // 1/4 size of display (2560,1600)
   //fullScreen();
-   
+  
   initialize_yIncrement();   
+  initializeRandomColorValuesForWindchimes();
+  
+  // static background
+  sunset(purple1,purple2, 0,height/4);
+  sunset(purple2,red, height/4,height/2);
+  
+  windchime(width/4 - 40);
+  windchime(width/2 - 20);
+  windchime(3 * width/4);
 }
 
 void draw() {
-  sunset(purple1,purple2, 0,height/4);
-  sunset(purple2,red, height/4,height/2);
+  // background of animated cat
   sunset(red,orange, height/2,3*height/4);
   sunset(orange,yellow, 3*height/4,height);
   
-  //windchime();
-  
-  // the following 23 lines draw the cat
+  // the following draws the cat (which looks kinda like a cow)
   pushMatrix();
     strokeWeight(2);
-    translate(2*width/5, (4*height/5) - 30); // z was 10
+    translate(width/3, (height/2) - 10); // z was 10
+    scale(2,2);
     // back of the cat-- left of the dip
     noisyLine(0,0,0,-20);
     noisyLine(18,-5,0,-5);
@@ -86,104 +101,4 @@ void draw() {
   //text(pmouseX,20,20);
   //text(pmouseY,20,40);
   
-}
-
-// --------------------------------------------------------------------------------
-void sunset(color color1, color color2, float y_bandInitial, float y_bandFinal) {
-  pushMatrix();
-    translate(-50,-30); // z was -50
-    noStroke();
-    fill(color1);
-    rect(0,y_bandInitial,width + 100,10);
-    for (int i = 10; i < y_bandFinal; i+=10) {
-      float amount = 0.1+(i/100.0);
-      newColor = lerpColor(color1,color2,amount);
-      fill(newColor);
-      rect(0,y_bandInitial + i,width + 100,10);
-    }
-    fill(color2);
-    rect(0,y_bandFinal,width + 100,10);
-  popMatrix();
-}
-
-// ------------------------------------------------------------
-void windchime1() {
-  pushMatrix();
-    stroke(0,0,0);
-    strokeWeight(5);
-    fill(100,100,100); // temp. replace with textures.
-    translate(width/2 - 20, height/8);
-    
-    line(0,0, 40,0); // horizontal line
-    line(20,0, 20,20); // vertical line
-
-    translate(20,40);
-    sphere(20);
-    
-    translate(0,20);
-    line(0,0,0,30);
-    
-    strokeWeight(0);
-    translate(0,30);
-    box(40,20,20);
-    
-    strokeWeight(5);
-    translate(0,10);
-    line(-10,0,-20,40); // left line
-    translate(-20,40);
-    sphere(10); // left sphere
-    
-    translate(20,-40); // z was -20
-    line(0,0,0,20); // middle line
-    translate(0,20); // z was 0
-    sphere(10); // middle sphere
-    line(0,10,0,60);
-    strokeWeight(0);
-    translate(0,70);
-    box(30);
-    
-    strokeWeight(5);
-    translate(0,-70); // z was 20
-    line(10,-20,20,20); // right line
-    translate(20,20);
-    sphere(10); // right sphere
-  popMatrix();
-}
-
-void windchime2() {
-  
-}
-
-// ------------------------------------------------------------
-void initialize_yIncrement() {
-  for (int i = 0; i < 200; i ++) {
-    yIncrement[i] = 1;
-    //yIncrement[i] = random(-1 * noiseScale, noiseScale);
-  }
-}
-
-void noisyLine(int xInc, int yInc, int lineLength, float rotation) {
-  pushMatrix();
-    stroke(255,255,255);
-  
-    rotate(radians(rotation));
-    
-    for (int i = 0; i < 18 + lineLength; i += random(0,8)) {
-      pushMatrix();
-        translate(xInc, yInc);
-          line(i, yIncrement[i], i, yIncrement[i]); 
-      popMatrix();
-    }
-  popMatrix();
-}
-
-void swingingTail() {
-  TIME+=1;
-  pushMatrix();
-    strokeWeight(4);
-    translate(373,357);
-    rotate(109.6);
-      noisyLine(0,0,40,sin(TIME * 0.1)*20);
-      noisyLine(-4,-2,42,sin(TIME * 0.1)*20);
-  popMatrix();
 }
