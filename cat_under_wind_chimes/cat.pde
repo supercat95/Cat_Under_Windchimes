@@ -3,7 +3,7 @@
 void initialize_yIncrement() {
   for (int i = 0; i < 200; i ++) {
     yIncrement[i] = 1;
-    //yIncrement[i] = random(-1 * noiseScale, noiseScale);
+    yIncrement[i] = random(-1 * noiseScale, noiseScale);
   }
 }
 

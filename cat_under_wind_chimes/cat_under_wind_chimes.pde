@@ -56,7 +56,7 @@ void draw() {
   // the following draws the cat (which looks kinda like a cow)
   pushMatrix();
     strokeWeight(2);
-    translate(width/3, (height/2) - 10); // z was 10
+    translate(width/3, (height/2) + 8 - 10); // z was 10
     scale(2,2);
     // back of the cat-- left of the dip
     noisyLine(0,0,0,-20);
@@ -92,7 +92,10 @@ void draw() {
     noisyLine(-22,0,-2,-45);
   popMatrix();
    
-  swingingTail();
+  pushMatrix();
+    translate(0,2);
+      swingingTail();
+  popMatrix();
   
   //// the following is for drawing purposes
   //fill(100,100,100);
